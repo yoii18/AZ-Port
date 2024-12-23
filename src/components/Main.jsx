@@ -1,4 +1,16 @@
+import { useState } from "react"
+import { Dropdown } from "./Dropdown"
+
 export const Main = () => {
+    const [dropdown, setDropdown] = useState(false)
+    const [selectedOption, setSelectedOption] = useState('');
+    const dropdownOptions = [
+        { label: 'がん領域', value: 'Option 1' },
+        { label: '糖尿病・循環器・腎疾患', value: 'Option 2' },
+        { label: '呼吸器・免疫疾患', value: 'Option 3' },
+        { label: '感染症', value: ''},
+        { label: '消化器疾患', value: ''}
+      ]
     return (
         <div className="ml-[15%]">
             <div className="box-border mt-11 mr-1">
@@ -12,7 +24,10 @@ export const Main = () => {
             <div className="mt-[3%]">
                 現在、治療中の疾患領域を選んでください。<br />
                 領域を選ぶと、製品リストが確認できますので、製品を選んでください
-                </div>
+            </div>
+        <Dropdown title = {"領域"} options={dropdownOptions} selectedOption={selectedOption} setSelectedOption={setSelectedOption}/>
+        { selectedOption == '' ? "skeleton" : <Dropdown title={"製品"} options={dropdownOptions}/> }
+
         </div>
     )
 }
